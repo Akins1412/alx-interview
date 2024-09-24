@@ -1,23 +1,19 @@
 #!/usr/bin/python3
-"""A function to determine the fewest number of coins needed
-   to meet a given amount total"""
+"""
+Island Perimeter:
+    returns the perimeter of the island described in grid
+"""
 
 
-def makeChange(coins, total):
-    """This function will take a list of coins and use
-       that to calculate how much change the total will require
-    """
-    if total <= 0:
-        return 0
-
-    else:
-        coin = sorted(coins)
-        coin.reverse()
-        counter = 0
-        for i in coin:
-            while(total >= i):
-                counter += 1
-                total -= i
-        if total == 0:
-            return counter
-        return -1
+def island_perimeter(grid):
+    """island perimenter function"""
+    perimeter = 0
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if grid[i][j] == 1:
+                perimeter += 4
+                if i > 0 and grid[i-1][j] == 1:
+                    perimeter -= 2
+                if j > 0 and grid[i][j-1] == 1:
+                    perimeter -= 2
+    return perimeter
