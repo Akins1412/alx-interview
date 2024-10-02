@@ -1,10 +1,6 @@
 #!/usr/bin/python3
-"""
-Main file for testing
-"""
 
-makeChange = __import__('0-making_change').makeChange
+isWinner = __import__('0-prime_game').isWinner
 
-print(makeChange([1, 2, 25], 37))
 
-print(makeChange([1256, 54, 48, 16, 102], 1453))
+print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))

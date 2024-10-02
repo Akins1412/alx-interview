@@ -1,23 +1,44 @@
 #!/usr/bin/python3
-"""A function to determine the fewest number of coins needed
-   to meet a given amount total"""
+"""
+Module: Game of choosing Prime numbers
+"""
 
 
-def makeChange(coins, total):
-    """This function will take a list of coins and use
-       that to calculate how much change the total will require
+def primeNumbers(n):
+    """Return list of prime numbers between 1 and n inclusive
+       Args:
+        n (int): upper boundary of range. lower boundary is always 1
     """
-    if total <= 0:
-        return 0
+    primeNos = []
+    filtered = [True] * (n + 1)
+    for prime in range(2, n + 1):
+        if (filtered[prime]):
+            primeNos.append(prime)
+            for i in range(prime, n + 1, prime):
+                filtered[i] = False
+    return primeNos
 
-    else:
-        coin = sorted(coins)
-        coin.reverse()
-        counter = 0
-        for i in coin:
-            while(total >= i):
-                counter += 1
-                total -= i
-        if total == 0:
-            return counter
-        return -1
+
+def isWinner(x, nums):
+    """
+    Determines winner of Prime Game
+    Args:
+        x (int): no. of rounds of game
+        nums (int): upper limit of range for each round
+    Return:
+        Name of winner (Maria or Ben) or None if winner cannot be found
+    """
+    if x is None or nums is None or x == 0 or nums == []:
+        return None
+    Maria = Ben = 0
+    for i in range(x):
+        primeNos = primeNumbers(nums[i])
+        if len(primeNos) % 2 == 0:
+            Ben += 1
+        else:
+            Maria += 1
+    if Maria > Ben:
+        return 'Maria'
+    elif Ben > Maria:
+        return 'Ben'
+    return None
